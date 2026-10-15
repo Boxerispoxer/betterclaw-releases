@@ -1,8 +1,19 @@
 {
   "schema": 1,
   "repo": "Boxerispoxer/betterclaw-releases",
-  "generated_at": "2026-10-15T10:13:20.473Z",
+  "generated_at": "2026-10-15T10:33:01.350Z",
   "assets": [
+    {
+      "id": 643462673,
+      "name": "BetterClaw-Acquisition-1.0.1-windows.exe",
+      "size": 956947419,
+      "sha256": "c89ae0e8673686444df6ede839f5a558e0ba34f72b46ed8e72338727f63d5241",
+      "url": "https://github.com/Boxerispoxer/betterclaw-releases/releases/download/windows-acquisition-v1.0.1/BetterClaw-Acquisition-1.0.1-windows.exe",
+      "state": "uploaded",
+      "tag": "windows-acquisition-v1.0.1",
+      "notes": "# BetterClaw Windows 智能体 · 获客版 1.0.1\n\n- Windows x64 安装器，直接下载 EXE 后运行。\n- 本次发行使用用户提供的「BetterClaw win 智能体-获客版1.0.1.zip」中的安装器。\n- 安装器内部版本：40.10.2，构建时间：202610151204。\n- 请使用同名 SHA-256 校验文件核对下载文件。\n",
+      "published_at": "2026-10-15T10:32:53Z"
+    },
     {
       "id": 643361643,
       "name": "BetterClaw-2.0.0-mac-arm64-development.dmg",
