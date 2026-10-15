@@ -1,0 +1,52 @@
+name: Update installer catalog
+
+on:
+  release:
+    types: [published, edited, deleted, unpublished]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/release-catalog.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: installer-catalog
+  cancel-in-progress: false
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read published releases and commit public metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'NODE'
+          const repo = process.env.GITHUB_REPOSITORY;
+          const headers = {Authorization: `Bearer ${process.env.GH_TOKEN}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'};
+          async function request(path, options = {}) {
+            const response = await fetch(`https://api.github.com/repos/${repo}${path}`, {...options, headers: {...headers, ...options.headers}, signal: AbortSignal.timeout(30000)});
+            if (response.status === 404 && !options.method) return null;
+            if (!response.ok) throw Error(`GitHub request failed: ${response.status}`);
+            return response.json();
+          }
+          const releases = [];
+          for (let page = 1; page <= 10; page++) {
+            const batch = await request(`/releases?per_page=100&page=${page}`);
+            if (!Array.isArray(batch)) throw Error('Invalid releases response');
+            releases.push(...batch);
+            if (batch.length < 100) break;
+          }
+          const assets = releases.filter(r => !r.draft).flatMap(r => r.assets
+            .filter(a => a.state === 'uploaded' && /\.(exe|msi|dmg|pkg|zip)$/i.test(a.name) && /^sha256:[a-f0-9]{64}$/.test(a.digest || ''))
+            .map(a => ({id: a.id, name: a.name, size: a.size, sha256: a.digest.slice(7), url: a.browser_download_url,
+              state: a.state, tag: r.tag_name, notes: r.body || '', published_at: r.published_at})));
+          const existing = await request('/contents/assets.json?ref=main');
+          const catalog = {schema: 1, repo, generated_at: new Date().toISOString(), assets};
+          await request('/contents/assets.json', {method: 'PUT', body: JSON.stringify({message: 'Update public installer catalog', branch: 'main',
+            content: Buffer.from(JSON.stringify(catalog, null, 2) + '\n').toString('base64'), ...(existing?.sha ? {sha: existing.sha} : {})})});
+          console.log(`Catalog updated: ${assets.length} installer asset(s).`);
+          NODE
