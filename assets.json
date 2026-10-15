@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "repo": "Boxerispoxer/betterclaw-releases",
+  "generated_at": "2026-10-15T07:31:41.528Z",
+  "assets": [
+    {
+      "id": 643025518,
+      "name": "pipeline-test.zip",
+      "size": 196,
+      "sha256": "6d1f1673603f9ccc68aee3e915c0174d5219ff2354c799166590c7c421b0d52c",
+      "url": "https://github.com/Boxerispoxer/betterclaw-releases/releases/download/website-verification-20261015/pipeline-test.zip",
+      "state": "uploaded",
+      "tag": "website-verification-20261015",
+      "notes": "Website deployment verification fixture. This ZIP contains a text file and is not a BetterClaw installer. It is used temporarily to verify the release-management integration.\n",
+      "published_at": "2026-10-15T07:12:48Z"
+    }
+  ]
+}
