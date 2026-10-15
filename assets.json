@@ -1,6 +1,18 @@
 {
   "schema": 1,
   "repo": "Boxerispoxer/betterclaw-releases",
-  "generated_at": "2026-10-15T07:38:50.840Z",
-  "assets": []
+  "generated_at": "2026-10-15T10:13:11.143Z",
+  "assets": [
+    {
+      "id": 643361643,
+      "name": "BetterClaw-2.0.0-mac-arm64-development.dmg",
+      "size": 1591052887,
+      "sha256": "dcf4b20d7d082acd262ce032f10996d9604e0ed4ed60279e5fe14ade94f8e362",
+      "url": "https://github.com/Boxerispoxer/betterclaw-releases/releases/download/macos-v2.0.0-development/BetterClaw-2.0.0-mac-arm64-development.dmg",
+      "state": "uploaded",
+      "tag": "macos-v2.0.0-development",
+      "notes": "BetterClaw macOS Apple Silicon（ARM64）开发构建，版本 2.0.0。\n\n下载 `.dmg` 文件后双击打开，并按安装窗口提示操作。对应的 `.sha256` 文件可用于核对下载完整性。\n\n此发行文件保留原始安装包的 development 构建标识。\n",
+      "published_at": "2026-10-15T10:13:03Z"
+    }
+  ]
 }
